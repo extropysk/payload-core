@@ -26,6 +26,9 @@
   "peerDependencies": {
     "payload": "^2.0.0"
   },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2"
+  },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",
     "@semantic-release/changelog": "^6.0.3",

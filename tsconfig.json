@@ -5,6 +5,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "resolveJsonModule": true,
     "target": "es6",
     "outDir": "./dist",
     "allowJs": true,
