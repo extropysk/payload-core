@@ -1,6 +1,6 @@
 {
   "name": "@extropysk/payload-core",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage:": "https://payloadcms.com",
   "repository": "git@github.com:payloadcms/payload-plugin-template.git",
   "description": "Blank plugin template for Payload",
