@@ -1,5 +1,5 @@
-import { createId } from '@paralleldrive/cuid2'
 import type { FieldHook } from 'payload/types'
+import { createId } from '../../../utils'
 
 export const populateId: FieldHook = async ({ operation, value, data }) => {
   if (operation === 'create') {
