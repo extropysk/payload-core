@@ -8,18 +8,13 @@ import { useLng } from '../../../hooks'
 import { DATE_FORMATS } from '../../../translations'
 
 import './styles.scss'
+import { toUtc } from '../../../utils'
 
 interface Props extends DateTimeInputProps {
   admin: DateField['admin']
   custom?: {
     tz?: 'UTC'
   }
-}
-
-export function toUtc(date: Date | string): Date {
-  const dateObj = typeof date === 'string' ? new Date(date) : date
-  const offset = dateObj.getTimezoneOffset() * 60 * 1000
-  return new Date(dateObj.getTime() - offset)
 }
 
 export const DatePickerField: React.FC<Props> = ({
