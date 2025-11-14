@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import { CollectionConfig } from 'payload/types'
 
 const newCollection: CollectionConfig = {
   slug: 'new-collection',
@@ -13,4 +13,4 @@ const newCollection: CollectionConfig = {
   ],
 }
 
-export default newCollection;
+export default newCollection
