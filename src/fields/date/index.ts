@@ -37,7 +37,7 @@ export const dateField = ({
   admin: {
     ...admin,
     components: {
-      Cell: datePickerCell(admin.date?.pickerAppearance),
+      Cell: datePickerCell({ pickerAppearance: admin.date?.pickerAppearance, tz }),
       Field: DatePickerField,
     },
     date: {

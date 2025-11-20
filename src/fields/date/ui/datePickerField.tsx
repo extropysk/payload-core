@@ -30,7 +30,7 @@ export const DatePickerField: React.FC<Props> = ({
   const lng = useLng()
   const { value = defaultValue, setValue, errorMessage, showError } = useFieldType({ path })
 
-  const appearance = admin?.date?.pickerAppearance ?? 'dayAndTime'
+  const appearance = admin?.date?.pickerAppearance ?? 'dayOnly'
   const displayFormat = DATE_FORMATS[appearance][lng]
 
   const tz = custom?.tz

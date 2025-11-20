@@ -3,7 +3,7 @@ import type { ConditionalDateProps } from 'payload/dist/admin/components/element
 
 import { format } from 'date-fns'
 import { cs, enUS, sk } from 'date-fns/locale'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useLng } from '../../../hooks'
 import { DATE_FORMATS } from '../../../translations'
 
@@ -13,16 +13,33 @@ const LOCALE_MAP = {
   sk,
 } as const
 
+type Args = {
+  pickerAppearance: ConditionalDateProps['pickerAppearance']
+  tz?: 'UTC'
+}
+
 export const datePickerCell =
-  (pickerAppearance: ConditionalDateProps['pickerAppearance']): React.FC<Props> =>
+  ({ pickerAppearance, tz }: Args): React.FC<Props> =>
   props => {
     const lng = useLng()
     const { cellData } = props
 
-    if (!cellData) return null
+    const displayedValue = useMemo(() => {
+      if (typeof cellData !== 'string') return null
 
-    const dateFormat = DATE_FORMATS[pickerAppearance ?? 'dayAndTime']
+      if (tz === 'UTC') {
+        const utcDate = new Date(cellData)
+        const offset = utcDate.getTimezoneOffset() * 60 * 1000
+        return new Date(utcDate.getTime() + offset)
+      } else {
+        return new Date(cellData)
+      }
+    }, [tz, cellData])
+
+    if (!displayedValue) return null
+
+    const dateFormat = DATE_FORMATS[pickerAppearance ?? 'dayOnly']
     const formatPattern = dateFormat[lng] || dateFormat.en
     const dateLocale = LOCALE_MAP[lng] || enUS
-    return <span>{format(cellData as any, formatPattern, { locale: dateLocale })}</span>
+    return <span>{format(displayedValue, formatPattern, { locale: dateLocale })}</span>
   }
