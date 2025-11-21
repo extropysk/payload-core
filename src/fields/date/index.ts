@@ -41,7 +41,7 @@ export const dateField = ({
       Field: DatePickerField,
     },
     date: {
-      pickerAppearance: admin.date?.pickerAppearance,
+      ...(admin.date || {}),
     },
   },
   defaultValue,
