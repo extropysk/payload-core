@@ -40,9 +40,6 @@ export const dateField = ({
       Cell: datePickerCell({ pickerAppearance: admin.date?.pickerAppearance, tz }),
       Field: DatePickerField,
     },
-    date: {
-      ...(admin.date || {}),
-    },
   },
   defaultValue,
   hooks,
