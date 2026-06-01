@@ -2,6 +2,12 @@
   "fields": {
     "email": {
       "label": "Email"
+    },
+    "nameSurname": {
+      "label": "Meno Priezvisko"
+    },
+    "roles": {
+      "label": "Roly"
     }
   }
 }

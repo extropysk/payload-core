@@ -1,15 +1,13 @@
-import { buildConfig } from 'payload/config';
-import path from 'path';
-import Users from './collections/Users';
-import Examples from './collections/Examples';
+import { buildConfig } from 'payload/config'
+import path from 'path'
+import Examples from './collections/Examples'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { slateEditor } from '@payloadcms/richtext-slate'
-import { samplePlugin } from '../../src/index'
+import { corePlugin } from '../../src/index'
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
     bundler: webpackBundler(),
     webpack: config => {
       const newConfig = {
@@ -28,16 +26,14 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [
-    Examples, Users,
-  ],
+  collections: [Examples],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [samplePlugin({ enabled: true })],
+  plugins: [corePlugin({})],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
