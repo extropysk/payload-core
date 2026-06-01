@@ -3,8 +3,8 @@ import type { Access, CollectionConfig } from 'payload/types'
 import { translate } from '../../translations'
 
 import { loginAfterCreate } from './hooks/loginAfterCreate'
-import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 import { Guard } from '@extropysk/express-core'
+import { rolesField } from '../../fields/roles'
 
 interface Args {
   guard: Guard
@@ -49,21 +49,7 @@ export const users = ({ guard, roles }: Args): CollectionConfig => {
         type: 'text',
         label: translate('fields:nameSurname.label'),
       },
-      {
-        name: 'roles',
-        type: 'select',
-        access: {
-          create: guard.admin,
-          update: guard.admin,
-        },
-        defaultValue: [],
-        hasMany: true,
-        hooks: {
-          beforeChange: [ensureFirstUserIsAdmin({ guard })],
-        },
-        label: translate('fields:roles.label'),
-        options: Object.values(roles).map(value => ({ label: value, value })),
-      },
+      rolesField({ guard, roles }),
     ],
     hooks: {
       afterChange: [loginAfterCreate],
