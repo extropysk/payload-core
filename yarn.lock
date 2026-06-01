@@ -549,10 +549,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.44.0.tgz#961a5903c74139390478bdc808bcde3fc45ab7af"
   integrity sha512-Ag+9YM4ocKQx9AarydN0KY2j0ErMHNIocPDrVo8zAE44xLTjEtz81OdR68/cydGtk6m6jDb5Za3r2useMzYmSw==
 
-"@extropysk/express-core@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@extropysk/express-core/-/express-core-1.2.3.tgz#e607fa164353bae5b78aa8d4375f34706cd3dfbe"
-  integrity sha512-+FS1N8zhufFS/lNSz6wNVBjpdqidbTGJxSj0D/Pq7CSfwYmSsrRsNVN9cI4yuBq9PnE+P/4EEpat96YVYMGMsw==
+"@extropysk/express-core@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@extropysk/express-core/-/express-core-1.2.4.tgz#7cad6ceba18afea18d2e2e3fb30dfbc3d610c39a"
+  integrity sha512-p4TjBHN/3AB8WIw9rTgCX/vPraaiOMQG9RVddAXsQ/oW4WLwQ+FaCX1UyOcG1l7RJv1PbC4ypVB6Dz0ZC3HS7A==
   dependencies:
     uid "^2.0.2"
     lru-cache "^11.2.2"

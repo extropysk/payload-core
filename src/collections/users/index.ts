@@ -1,55 +1,73 @@
-import type { CollectionConfig } from 'payload/types'
-import { admin, guard, self, UserRole } from '../../access'
+import type { Access, CollectionConfig } from 'payload/types'
+
 import { translate } from '../../translations'
 
 import { loginAfterCreate } from './hooks/loginAfterCreate'
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
+import { Guard } from '@extropysk/express-core'
 
-export const users = (): CollectionConfig => ({
-  slug: 'users',
-  access: {
-    admin: () => true,
-    create: admin,
-    delete: admin,
-    read: self,
-    update: self,
-  },
-  admin: {
-    defaultColumns: ['name', 'email'],
-    group: 'core',
-    hidden: ({ user }) => !guard.checkAdmin(user),
-    useAsTitle: 'email',
-  },
-  auth: {
-    cookies: {
-      secure: true,
-      sameSite: 'lax',
+interface Args {
+  guard: Guard
+  roles: string[]
+}
+
+export const users = ({ guard, roles }: Args): CollectionConfig => {
+  const self: Access = ({ req: { user } }) => {
+    if (!user) return false
+
+    if (guard.checkAdmin(user)) return true
+
+    return {
+      id: { equals: user?.id },
+    }
+  }
+
+  return {
+    slug: 'users',
+    access: {
+      admin: () => true,
+      create: guard.admin,
+      delete: guard.admin,
+      read: self,
+      update: self,
     },
-  },
-  fields: [
-    {
-      name: 'name',
-      type: 'text',
-      label: translate('fields:nameSurname.label'),
+    admin: {
+      defaultColumns: ['name', 'email'],
+      group: 'core',
+      hidden: ({ user }) => !guard.checkAdmin(user),
+      useAsTitle: 'email',
     },
-    {
-      name: 'roles',
-      type: 'select',
-      access: {
-        create: admin,
-        update: admin,
+    auth: {
+      cookies: {
+        secure: true,
+        sameSite: 'lax',
       },
-      defaultValue: [],
-      hasMany: true,
-      hooks: {
-        beforeChange: [ensureFirstUserIsAdmin],
-      },
-      label: translate('fields:roles.label'),
-      options: Object.values(UserRole).map(value => ({ label: value, value })),
     },
-  ],
-  hooks: {
-    afterChange: [loginAfterCreate],
-  },
-  timestamps: true,
-})
+    fields: [
+      {
+        name: 'name',
+        type: 'text',
+        label: translate('fields:nameSurname.label'),
+      },
+      {
+        name: 'roles',
+        type: 'select',
+        access: {
+          create: guard.admin,
+          update: guard.admin,
+        },
+        defaultValue: [],
+        hasMany: true,
+        hooks: {
+          beforeChange: [ensureFirstUserIsAdmin({ guard })],
+        },
+        label: translate('fields:roles.label'),
+        options: Object.values(roles).map(value => ({ label: value, value })),
+      },
+    ],
+    hooks: {
+      afterChange: [loginAfterCreate],
+    },
+    timestamps: true,
+  }
+}

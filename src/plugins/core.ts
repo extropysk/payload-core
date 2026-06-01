@@ -2,10 +2,14 @@ import type { Plugin } from 'payload/config'
 import type { Payload } from 'payload/dist/payload'
 
 import { users } from '../collections/users'
+import { Guard } from '@extropysk/express-core'
 
-interface Args {}
+interface Args {
+  guard: Guard
+  roles?: string[]
+}
 
-const onInitExtension = (pluginOptions: Args, payload: Payload): void => {
+const onInitExtension = (args: Args, payload: Payload): void => {
   const { express: app } = payload
 
   if (!app) return
@@ -19,8 +23,10 @@ const onInitExtension = (pluginOptions: Args, payload: Payload): void => {
 }
 
 export const corePlugin =
-  (pluginOptions: Args): Plugin =>
+  (args: Args): Plugin =>
   incomingConfig => {
+    const { guard, roles = ['admin'] } = args
+
     let config = { ...incomingConfig }
 
     config.admin = {
@@ -37,7 +43,7 @@ export const corePlugin =
     config.collections = [
       ...(config.collections || []),
       // Add additional collections here
-      users(),
+      users({ guard, roles }),
     ]
 
     config.endpoints = [
@@ -58,7 +64,7 @@ export const corePlugin =
     config.onInit = async payload => {
       if (incomingConfig.onInit) await incomingConfig.onInit(payload)
       // Add additional onInit code by using the onInitExtension function
-      onInitExtension(pluginOptions, payload)
+      onInitExtension(args, payload)
     }
 
     return config
