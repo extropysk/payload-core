@@ -1,4 +1,18 @@
 {
+  "collections": {
+    "users": {
+      "labels": {
+        "singular": "Užívateľ",
+        "plural": "Užívatelia"
+      }
+    },
+    "categories": {
+      "labels": {
+        "singular": "Kategória",
+        "plural": "Kategórie"
+      }
+    }
+  },
   "fields": {
     "email": {
       "label": "Email"
@@ -8,6 +22,12 @@
     },
     "roles": {
       "label": "Roly"
+    },
+    "title": {
+      "label": "Nadpis"
+    },
+    "description": {
+      "label": "Popis"
     }
   }
 }

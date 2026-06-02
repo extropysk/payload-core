@@ -1,17 +1,18 @@
 import type { Access, CollectionConfig } from 'payload/types'
 
-import { translate } from '../../translations'
+import { translate } from '../../../translations'
 
 import { loginAfterCreate } from './hooks/loginAfterCreate'
 import { Guard } from '@extropysk/express-core'
-import { rolesField } from '../../fields/roles'
+import { rolesField } from '../../../fields/roles'
 
 interface Args {
   guard: Guard
+  group: string
   roles: string[]
 }
 
-export const users = ({ guard, roles }: Args): CollectionConfig => {
+export const users = ({ guard, roles, group }: Args): CollectionConfig => {
   const self: Access = ({ req: { user } }) => {
     if (!user) return false
 
@@ -33,7 +34,7 @@ export const users = ({ guard, roles }: Args): CollectionConfig => {
     },
     admin: {
       defaultColumns: ['name', 'email'],
-      group: 'core',
+      group,
       hidden: ({ user }) => !guard.checkAdmin(user),
       useAsTitle: 'email',
     },
@@ -55,5 +56,9 @@ export const users = ({ guard, roles }: Args): CollectionConfig => {
       afterChange: [loginAfterCreate],
     },
     timestamps: true,
+    labels: {
+      plural: translate('collections:users.labels.plural'),
+      singular: translate('collections:users.labels.singular'),
+    },
   }
 }

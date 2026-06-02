@@ -5,7 +5,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { Guard, Permission } from '@extropysk/express-core'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { corePlugin } from '../../src/index'
+import { corePlugin, contentPlugin } from '../../src/index'
 
 const ROLES = ['admin', 'user']
 
@@ -13,7 +13,7 @@ const getRolePermissions = (role: unknown): Permission[] => {
   return []
 }
 
-export const guard = new Guard({
+const guard = new Guard({
   getRolePermissions,
 })
 
@@ -37,6 +37,11 @@ export default buildConfig({
     },
   },
   editor: lexicalEditor({}),
+  localization: {
+    defaultLocale: 'en',
+    fallback: true,
+    locales: ['en', 'sk'],
+  },
   collections: [Examples],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
@@ -44,7 +49,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [corePlugin({ guard, roles: ROLES })],
+  plugins: [corePlugin({ guard, roles: ROLES }), contentPlugin({ guard })],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),

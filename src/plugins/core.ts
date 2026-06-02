@@ -1,13 +1,15 @@
 import type { Plugin } from 'payload/config'
 import type { Payload } from 'payload/dist/payload'
 
-import { users } from '../collections/users'
+import { users } from '../collections/core/users'
 import { Guard } from '@extropysk/express-core'
 
 interface Args {
   guard: Guard
   roles?: string[]
 }
+
+const GROUP = 'core'
 
 const onInitExtension = (args: Args, payload: Payload): void => {
   const { express: app } = payload
@@ -43,7 +45,7 @@ export const corePlugin =
     config.collections = [
       ...(config.collections || []),
       // Add additional collections here
-      users({ guard, roles }),
+      users({ guard, roles, group: GROUP }),
     ]
 
     config.endpoints = [

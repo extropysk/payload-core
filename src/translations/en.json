@@ -1,4 +1,18 @@
 {
+  "collections": {
+    "users": {
+      "labels": {
+        "singular": "User",
+        "plural": "Users"
+      }
+    },
+    "categories": {
+      "labels": {
+          "singular": "Category",
+          "plural": "Categories"
+      }
+    }
+  },
   "fields": {
     "email": {
       "label": "Email"
@@ -8,6 +22,12 @@
     },
     "roles": {
       "label": "Roles"
+    },
+    "title": {
+      "label": "Title"
+    },
+    "description": {
+      "label": "Description"
     }
   }
 }
