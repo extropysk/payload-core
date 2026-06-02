@@ -11,6 +11,12 @@
         "singular": "Kategória",
         "plural": "Kategórie"
       }
+    },
+    "media": {
+        "labels": {
+            "singular": "Média",
+            "plural": "Média"
+        }
     }
   },
   "fields": {
@@ -28,6 +34,9 @@
     },
     "description": {
       "label": "Popis"
+    },
+    "alt": {
+        "label": "Popis"
     }
   }
 }

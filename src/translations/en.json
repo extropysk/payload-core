@@ -11,6 +11,12 @@
           "singular": "Category",
           "plural": "Categories"
       }
+    },
+    "media": {
+        "labels": {
+            "singular": "Media",
+            "plural": "Media"
+        }
     }
   },
   "fields": {
@@ -28,6 +34,9 @@
     },
     "description": {
       "label": "Description"
+    },    
+    "alt": {
+        "label": "Alt"
     }
   }
 }

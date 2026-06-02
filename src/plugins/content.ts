@@ -2,6 +2,7 @@ import type { Plugin } from 'payload/config'
 import type { Payload } from 'payload/dist/payload'
 import { Guard } from '@extropysk/express-core'
 import { categories } from '../collections/content/categories'
+import { media } from '../collections/content/media'
 
 interface Args {
   guard: Guard
@@ -44,6 +45,7 @@ export const contentPlugin =
       ...(config.collections || []),
       // Add additional collections here
       categories({ guard, group: GROUP }),
+      media({ guard, group: GROUP }),
     ]
 
     config.endpoints = [
