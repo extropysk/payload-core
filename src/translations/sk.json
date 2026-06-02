@@ -17,6 +17,12 @@
             "singular": "Média",
             "plural": "Média"
         }
+    },
+    "posts": {
+        "labels": {
+            "singular": "Príspevok",
+            "plural": "Príspevky"
+        }
     }
   },
   "fields": {
@@ -37,6 +43,30 @@
     },
     "alt": {
         "label": "Popis"
+    },
+    "media": {
+        "label": "Media"
+    },
+    "files": {
+        "labels": {
+            "singular": "Súbor",
+            "plural": "Súbory"
+        }
+    },
+    "detail": {
+        "label": "Detail"
+    },
+    "summary": {
+        "label": "Zhrnutie"
+    },
+    "categories": {
+        "label": "Kategórie"
+    },
+    "publishedAt": {
+        "label": "Publikované dňa"
+    },
+    "content": {
+      "label": "Obsah"
     }
   }
 }

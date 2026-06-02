@@ -17,6 +17,12 @@
             "singular": "Media",
             "plural": "Media"
         }
+    },
+    "posts": {
+        "labels": {
+            "singular": "Post",
+            "plural": "Posts"
+        }
     }
   },
   "fields": {
@@ -37,6 +43,30 @@
     },    
     "alt": {
         "label": "Alt"
+    },
+    "media": {
+        "label": "Media"
+    },
+    "files": {
+        "labels": {
+            "singular": "File",
+            "plural": "Files"
+        }
+    },
+    "detail": {
+        "label": "Detail"
+    },
+    "summary": {
+        "label": "Summary"
+    },
+    "categories": {
+      "label": "Categories"
+    },
+    "publishedAt": {
+      "label": "Published At"
+    },
+    "content": {
+      "label": "Content"
     }
   }
 }
