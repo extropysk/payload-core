@@ -20,7 +20,7 @@
     "@payloadcms/bundler-webpack": "^1.0.0",
     "@payloadcms/db-mongodb": "^1.0.0",
     "@payloadcms/plugin-cloud": "^2.0.0",
-    "@payloadcms/richtext-slate": "^1.0.0",
+    "@payloadcms/richtext-lexical": "^0.11.4",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

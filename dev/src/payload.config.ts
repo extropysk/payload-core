@@ -3,8 +3,8 @@ import path from 'path'
 import Examples from './collections/Examples'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
-import { slateEditor } from '@payloadcms/richtext-slate'
 import { Guard, Permission } from '@extropysk/express-core'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { corePlugin } from '../../src/index'
 
 const ROLES = ['admin', 'user']
@@ -36,7 +36,7 @@ export default buildConfig({
       return newConfig
     },
   },
-  editor: slateEditor({}),
+  editor: lexicalEditor({}),
   collections: [Examples],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
