@@ -2,13 +2,13 @@ import type { AccessResult } from 'payload/config'
 import type { CollectionConfig } from 'payload/types'
 
 import { Action, Guard } from '@extropysk/express-core'
-import { translate } from '../../../translations'
-import { filesField } from '../../../fields/files'
-import { richText } from '../../../fields/richText'
-import { dateField } from '../../../fields'
+import { translate } from '../../translations'
+import { filesField } from '../../fields/files'
+import { richText } from '../../fields/richText'
+import { dateField } from '../../fields'
 import { populatePublishedAt } from './hooks/populatePublishedAt'
-import { populatedUserField, userField } from '../../../fields/user'
-import { slugField } from '../../../fields/slug'
+import { populatedUserField, userField } from '../../fields/user'
+import { slugField } from '../../fields/slug'
 
 interface Args {
   guard: Guard

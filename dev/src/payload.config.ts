@@ -5,14 +5,18 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { Action, Guard, Permission } from '@extropysk/express-core'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { corePlugin, contentPlugin } from '../../src/index'
+import { corePlugin, categories, media, posts } from '../../src/index'
 
 const ROLES = ['admin', 'user']
+
+enum Subject {
+  CONTENT = 'content',
+}
 
 const getRolePermissions = (role: unknown): Permission[] => {
   switch (role) {
     case 'user':
-      return [{ subject: 'content', action: Action.READ_WRITE }]
+      return [{ subject: Subject.CONTENT, action: Action.READ_WRITE }]
     case 'admin':
     default:
       return []
@@ -48,14 +52,19 @@ export default buildConfig({
     fallback: true,
     locales: ['en', 'sk'],
   },
-  collections: [Examples],
+  collections: [
+    Examples,
+    categories({ guard, group: Subject.CONTENT }),
+    media({ guard, group: Subject.CONTENT }),
+    posts({ guard, group: Subject.CONTENT }),
+  ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [contentPlugin({ guard }), corePlugin({ guard, roles: ROLES })],
+  plugins: [corePlugin({ guard, roles: ROLES })],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),

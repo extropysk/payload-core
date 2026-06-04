@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 
 import { Action, Guard } from '@extropysk/express-core'
-import { translate } from '../../../translations'
+import { translate } from '../../translations'
 
 interface Args {
   guard: Guard
