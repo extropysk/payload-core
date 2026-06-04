@@ -1,8 +1,8 @@
 import express from 'express'
 import payload from 'payload'
 import { InitOptions } from 'payload/config'
+import config from './config'
 
-require('dotenv').config()
 const app = express()
 
 // Redirect root to Admin panel
@@ -13,7 +13,7 @@ app.get('/', (_, res) => {
 export const start = async (args?: Partial<InitOptions>) => {
   // Initialize Payload
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET,
+    secret: config.secret,
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)

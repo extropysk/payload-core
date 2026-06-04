@@ -6,6 +6,7 @@ import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { Action, Guard, Permission } from '@extropysk/express-core'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { corePlugin, categories, media, posts } from '../../src/index'
+import config from './config'
 
 const ROLES = ['admin', 'user']
 
@@ -66,6 +67,6 @@ export default buildConfig({
   },
   plugins: [corePlugin({ guard, roles: ROLES })],
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI,
+    url: config.databaseUri,
   }),
 })
